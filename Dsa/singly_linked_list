@@ -1,0 +1,146 @@
+class node:
+      def __init__(self,data):
+            self.data=data
+            self.next=None
+
+start=end=None
+
+def insertbeg(data):
+      global start,end
+      n=node(data)
+      if(start==None):
+            start=end=n
+      else:
+            n.next=start
+            start=n
+
+def insertend(data):
+      global start,end
+      n=node(data)
+      if(start==None):
+            start=end=n
+      else:
+            end.next=n
+            end=n
+
+def countnodes():
+      curr=start
+      i=0
+      while(curr):
+            i+=1
+            curr=curr.next
+            
+      return i
+      
+def insertpos(data,p):
+      global start,end
+      n=node(data)
+      curr=prev=start
+      if p>countnodes()+1:
+            print("Insertion not possible")
+      elif start==None:
+            start=end=n
+      else:
+            if p==1:
+                  n.next=start
+                  start=n
+            
+            else:
+                  i=1
+                  while i<p:
+                        prev=curr
+                        curr=curr.next
+                        i+=1
+                  if(curr):
+                        prev.next=n
+                        n.next=curr
+                  else:
+                        prev.next=n
+                        end=n
+
+def found(elem):
+      curr=start
+      while(curr):
+            if(curr.data==elem):
+                  return True
+            curr=curr.next
+      return False
+
+def insert_before_elem(data,elem):
+      global start,end
+      curr=prev=start
+      n=node(data)
+      if found(elem):
+            if start.data==elem:
+                  n.next=start
+                  start=n
+            else:
+                  while(curr.data!=elem):
+                        prev=curr
+                        curr=curr.next
+                  prev.next=n
+                  n.next=curr
+
+def delbeg():
+      global start,end
+      if (start==None):             #if list empty
+            print("cannot delete element, list empty")
+      elif (start.next==None):        #one node in list
+            start=end=None
+      else:
+            start=start.next
+
+def delend():
+      global start,end
+      if (start==None):             #if list empty
+            print("cannot delete element, list empty")
+      elif (start.next==None):        #one node in list
+            start=end=None
+      else:
+            curr=prev=start
+            while(curr.next):
+                  prev=curr
+                  curr=curr.next
+            prev.next=None
+            end=prev
+
+def delpos(p):
+      global start,end
+      if(p>countnodes()):
+            print("cannot delete, list doesn't have element at given pos")
+      elif p==1:
+            if(start.next==None):
+                  start=end=None
+            else:
+                  start=start.next
+      else:
+            i=1
+            curr=prev=start
+            while i<p:
+                  prev=curr
+                  curr=curr.next
+                  i+=1
+            if(curr.next==None):
+                  prev.next=None
+                  end=prev
+            else:
+                  prev.next=curr.next
+
+def delelem(elem):
+      global start,end
+      if (found(elem)):
+            if(start.data==elem):
+                  if(start.next==None):
+                        start=end=None
+                  else:
+                        start=start.next
+            else:
+                  prev=curr=start
+                  while(curr.data!=elem):
+                        prev=curr
+                        curr=curr.next
+                  if(curr.next==None):
+                        prev.next=None
+                        end=prev
+                  else:
+                        prev.next=curr.next
