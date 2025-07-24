@@ -1,0 +1,6 @@
+a=int(input("enter a no"))
+b=int(input("enter a no"))
+c=int(input("enter a no"))
+d=int(input("enter a no"))
+print ("sum is:",(a+b))
+print ("product is:",(c*d))
